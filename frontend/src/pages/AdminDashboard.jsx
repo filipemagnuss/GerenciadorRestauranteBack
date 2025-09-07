@@ -23,6 +23,11 @@ export default function AdminDashboard() {
     navigate('/admin/create-product');
   };
   
+  // Nova função para a rota do menu
+  const handleViewMenu = () => {
+    navigate('/admin/menu');
+  };
+
   return (
     <div className="flex min-h-screen bg-[#F0F5F0] overflow-hidden font-inter">
       <div
@@ -47,8 +52,8 @@ export default function AdminDashboard() {
               Criar Cardápio
             </span>
           </button>
-          <a
-            href="#"
+          <button
+            onClick={handleViewMenu}
             className={`flex items-center p-3 rounded-full text-lg font-semibold hover:bg-[#D9F2D9] hover:text-[#2C5234] transition-colors w-full text-left ${
               isSidebarOpen ? 'justify-start space-x-4' : 'justify-center'
             }`}
@@ -57,12 +62,12 @@ export default function AdminDashboard() {
             <span className={`transition-opacity duration-150 ${isSidebarOpen ? 'opacity-100' : 'opacity-0 absolute left-24'}`}>
               Visualizar Cardápio
             </span>
-          </a>
+          </button>
         </nav>
         <button
           onClick={handleLogout}
           className={`absolute bottom-4 flex items-center p-3 rounded-full w-[80%] text-lg font-semibold text-white bg-[#588157] hover:bg-[#4A724A] transition ${
-            isSidebarOpen ? 'left-1/2 -translate-x-1/2 justify-start space-x-4' : 'left-1/2 -translate-x-1/2 justify-center'
+            isSidebarOpen ? 'left-1/2 -translate-x-1/2 justify-start space-x-4' : 'justify-center'
           }`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>

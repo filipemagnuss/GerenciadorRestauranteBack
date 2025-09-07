@@ -10,10 +10,27 @@ export default function Menu() {
 
   useEffect(() => {
     const fetchMenuData = async () => {
+      // Obtém o token de autenticação do localStorage
+      const authToken = localStorage.getItem('authToken');
+
+      if (!authToken) {
+        setError("Erro: Token de autenticação não encontrado. Faça login novamente.");
+        setLoading(false);
+        return;
+      }
+
       try {
         const [categoriesRes, productsRes] = await Promise.all([
-          fetch(`${BASE_URL}/api/Categories`),
-          fetch(`${BASE_URL}/api/Products`)
+          fetch(`${BASE_URL}/api/Categories`, {
+            headers: {
+              'Authorization': `Bearer ${authToken}`
+            }
+          }),
+          fetch(`${BASE_URL}/api/Products`, {
+            headers: {
+              'Authorization': `Bearer ${authToken}`
+            }
+          })
         ]);
 
         if (categoriesRes.ok && productsRes.ok) {
@@ -109,5 +126,3 @@ export default function Menu() {
     </div>
   );
 }
-
-

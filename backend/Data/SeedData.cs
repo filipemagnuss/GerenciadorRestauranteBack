@@ -1,5 +1,5 @@
 using backend.Models;
-using System.Linq; // Garante que a extensão Any() está disponível
+using System.Linq;
 
 namespace backend.Data
 {
@@ -7,7 +7,7 @@ namespace backend.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            // Verifica se já existem usuários na base de dados para evitar duplicação.
+            // Verifica se já existem usuários para evitar duplicação.
             if (!context.Users.Any())
             {
                 // Adiciona o usuário administrador padrão
@@ -25,6 +25,20 @@ namespace backend.Data
                     PasswordHash = BCrypt.Net.BCrypt.HashPassword("123456"),
                     Role = "Atendente"
                 });
+
+                // Salva as mudanças no banco de dados.
+                context.SaveChanges();
+            }
+
+            // Verifica se já existem categorias para evitar duplicação.
+            if (!context.Categories.Any())
+            {
+                // Adiciona as categorias padrão
+                context.Categories.AddRange(
+                    new Category { Name = "Bebidas" },
+                    new Category { Name = "Lanches" },
+                    new Category { Name = "Refeições" }
+                );
 
                 // Salva as mudanças no banco de dados.
                 context.SaveChanges();
